@@ -12,7 +12,6 @@ public class ResultText extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_text);
         TextView text = findViewById(R.id.displayText);
-        TextView count = findViewById(R.id.count);
         Intent intent = getIntent();
         String answer = intent.getStringExtra("gptResult");
         String question = intent.getStringExtra("userQuestion");
@@ -22,6 +21,5 @@ public class ResultText extends AppCompatActivity {
         storeQuery.setQuestion(question);
         storeQuery.setAnswer(answer);
         db.addQuery(storeQuery);
-        count.setText(String.valueOf(db.getCount()));
     }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -59,18 +60,21 @@ public class TextBaseAnswer extends AppCompatActivity implements ChatGptCallback
         Intent intent = new Intent(TextBaseAnswer.this, ResultText.class);
         intent.putExtra("gptResult", aiResponse.toString());
         intent.putExtra("userQuestion", userText.toString());
+        Log.d("S", aiResponse.toString());
         startActivity(intent);
     }
 
     @Override
     public void onError(String error) {
-        hideLoadingPrompt();
-        Intent intent = new Intent(TextBaseAnswer.this, ResultText.class);
-        intent.putExtra("gptResult", aiResponse.toString());
-        startActivity(intent);
+            hideLoadingPrompt();
+            Intent intent = new Intent(TextBaseAnswer.this, ResultText.class);
+            intent.putExtra("gptResult", error);
+            startActivity(intent);
+        Log.d("S", aiResponse.toString() + error.toString());
     }
 
-    private void showLoadingPrompt() {
+
+        private void showLoadingPrompt() {
         loadingDialog = ProgressDialog.show(this, "", "Generating response...", true);
     }
 
